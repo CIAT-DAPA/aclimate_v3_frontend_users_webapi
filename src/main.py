@@ -8,6 +8,7 @@ from routes.user_register import router as user_register_router
 from routes.get_user_by_id import router as get_user_by_id_router
 from routes.user_validation import router as user_validation_router
 from routes.user_stations import router as user_stations_router
+from routes.root_redirect import router as root_redirect_router
 
 
 from aclimate_v3_orm_frontend.database.base import create_tables
@@ -29,6 +30,7 @@ app.add_middleware(
 )
 
 # Include routers
+app.include_router(root_redirect_router)
 app.include_router(client_token_router)
 app.include_router(token_validation_router)
 app.include_router(auth_router)
