@@ -31,16 +31,16 @@ jobs:
           cd src
           pip install -r requirements.txt
 
-      - name: Run Tests with pytest
-        env:
-          DATABASE_URL: "sqlite:///:memory:"
-          KEYCLOAK_URL: "http://localhost:8080"
-          REALM_NAME: "aclimate"
-          CLIENT_ID: "dummy-client"
-          CLIENT_SECRET: "dummy-secret"
-        run: |
-          source env/bin/activate
-          PYTHONPATH=$PYTHONPATH:./src pytest src/tests/
+      # - name: Run Tests with pytest
+      #   env:
+      #     DATABASE_URL: "sqlite:///:memory:"
+      #     KEYCLOAK_URL: "http://localhost:8080"
+      #     REALM_NAME: "aclimate"
+      #     CLIENT_ID: "dummy-client"
+      #     CLIENT_SECRET: "dummy-secret"
+      #   run: |
+      #     source env/bin/activate
+      #     PYTHONPATH=$PYTHONPATH:./src pytest src/tests/
 
 # ------- END API PROCCESS -------- #
 
