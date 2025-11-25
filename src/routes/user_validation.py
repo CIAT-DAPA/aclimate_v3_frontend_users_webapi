@@ -36,8 +36,8 @@ async def validate_user(user_data: UserValidationRequest):
     # Note: You might want to adjust app_id and profile based on your needs
     new_user = UserCreate(
         ext_key_clock_id=user_data.sub,
-        app_id=user_data.app_id,  # Default app_id, adjust as needed
-        profile=user_data.profile,  # Default profile, adjust as needed
+        app_id=user_data.app_id,  # Default app_id
+        profile=ProfileType.FARMER,  # Default profile
         enable=True
     )
     
