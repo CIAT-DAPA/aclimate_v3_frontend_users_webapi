@@ -33,11 +33,11 @@ pipeline {
                 script {
                     try {
                         sshCommand remote: remote, command: """
-                            cd /var/www/aclimate/aclimate_v3_api_frontend_users/aclimate_v3_frontend_users_webapi
+                            cd /var/www/aclimate/aclimate_v3_api_frontend/aclimate_v3_frontend_users_webapi
                             git checkout main
                             git pull origin main
                             source /opt/anaconda3/etc/profile.d/conda.sh
-                            conda activate /home/scalderon/.conda/envs/aclimate_v3_api_frontend_users
+                            conda activate /home/aclimate_v3/.conda/envs/aclimate_v3_api_front
                             pip install -r src/requirements.txt
                         """
                     } catch (Exception e) {
@@ -52,11 +52,11 @@ pipeline {
                 script {
                     try {
                         sshCommand remote: remote, command: """
-                            cd /var/www/aclimate/aclimate_v3_api_frontend_users/aclimate_v3_frontend_users_webapi/src
+                            cd /var/www/aclimate/aclimate_v3_api_frontend/aclimate_v3_frontend_users_webapi/src
                             source /opt/anaconda3/etc/profile.d/conda.sh
-                            conda activate /home/scalderon/.conda/envs/aclimate_v3_api_frontend_users
-                            fuser -k 3003/tcp || true
-                            nohup uvicorn main:app --host 0.0.0.0 --port 3003 > /var/www/aclimate/aclimate_v3_api_frontend_users/aclimate_v3_frontend_users_webapi/api.log 2>&1 &
+                            conda activate /home/aclimate_v3/.conda/envs/aclimate_v3_api_front
+                            fuser -k 3004/tcp || true
+                            nohup uvicorn main:app --host 0.0.0.0 --port 3004 > /var/www/aclimate/aclimate_v3_api_frontend/aclimate_v3_frontend_users_webapi/api.log 2>&1 &
                         """
                     } catch (Exception e) {
                         echo "API Restart Error: ${e.message}"
