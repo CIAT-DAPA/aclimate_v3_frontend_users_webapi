@@ -10,6 +10,7 @@ from routes.user_validation import router as user_validation_router
 from routes.user_stations import router as user_stations_router
 from routes.user_profile import router as user_profile_router
 from routes.root_redirect import router as root_redirect_router
+from routes.health import router as health_router
 
 
 from aclimate_v3_orm_frontend.database.base import create_tables
@@ -40,6 +41,9 @@ app.include_router(get_user_by_id_router)
 app.include_router(user_validation_router)
 app.include_router(user_stations_router)
 app.include_router(user_profile_router)
+
+# Health router (no authentication, excluded from OpenAPI schema)
+app.include_router(health_router)
 
 # Startup event to create tables
 @app.on_event("startup")

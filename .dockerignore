@@ -1,0 +1,29 @@
+# Version control
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+.venv/
+venv/
+env/
+
+# Environments
+.env
+.env.*
+
+# IDE
+.idea/
+.vscode/
+
+# Logs & temp
+*.log
+logs/
+
+# CI/CD
+Jenkinsfile
