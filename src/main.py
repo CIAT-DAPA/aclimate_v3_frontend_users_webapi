@@ -1,5 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
+
+from dependencies.auth_dependencies import get_current_user
 
 from auth.get_client_token import router as client_token_router 
 from auth.token_validation_router import router as token_validation_router
@@ -31,16 +33,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+_auth = [Depends(get_current_user)]
+
 # Include routers
+# Public routers (no authentication)
 app.include_router(root_redirect_router)
 app.include_router(client_token_router)
 app.include_router(token_validation_router)
 app.include_router(auth_router)
-app.include_router(user_register_router)
+
+# Protected routers (require valid user token)
+app.include_router(user_register_router, dependencies=_auth)
 app.include_router(get_user_by_id_router)
-app.include_router(user_validation_router)
-app.include_router(user_stations_router)
-app.include_router(user_profile_router)
+app.include_router(user_validation_router, dependencies=_auth)
+app.include_router(user_stations_router, dependencies=_auth)
+app.include_router(user_profile_router, dependencies=_auth)
 
 # Health router (no authentication, excluded from OpenAPI schema)
 app.include_router(health_router)

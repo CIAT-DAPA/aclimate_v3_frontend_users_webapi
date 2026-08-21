@@ -1,10 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 from enum import Enum
 from aclimate_v3_orm_frontend.services.user_service import UserService
 from aclimate_v3_orm_frontend.schemas.user_schema import UserUpdate, UserRead
 from aclimate_v3_orm_frontend.enums.profile_type import ProfileType
-from dependencies.auth_dependencies import get_current_user
 
 router = APIRouter(
     prefix="/user",
@@ -24,8 +23,7 @@ user_service = UserService()
 @router.put("/{user_id}/profile", response_model=UserRead, summary="Update user profile")
 async def update_user_profile(
     user_id: int,
-    profile_data: UpdateProfileRequest,
-    current_user: dict = Depends(get_current_user)
+    profile_data: UpdateProfileRequest
 ):
     """
     Update a user's profile type. Only FARMER and TECHNICIAN profiles are allowed.
